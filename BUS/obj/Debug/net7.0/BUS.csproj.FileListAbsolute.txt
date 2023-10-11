@@ -1,0 +1,17 @@
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\bin\Debug\net7.0\BUS.deps.json
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\bin\Debug\net7.0\BUS.dll
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\bin\Debug\net7.0\BUS.pdb
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\bin\Debug\net7.0\DAO.dll
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\bin\Debug\net7.0\DTO.dll
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\bin\Debug\net7.0\DTO.pdb
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\bin\Debug\net7.0\DAO.pdb
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\obj\Debug\net7.0\BUS.csproj.AssemblyReference.cache
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\obj\Debug\net7.0\BUS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\obj\Debug\net7.0\BUS.AssemblyInfoInputs.cache
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\obj\Debug\net7.0\BUS.AssemblyInfo.cs
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\obj\Debug\net7.0\BUS.csproj.CoreCompileInputs.cache
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\obj\Debug\net7.0\BUS.csproj.CopyComplete
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\obj\Debug\net7.0\BUS.dll
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\obj\Debug\net7.0\refint\BUS.dll
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\obj\Debug\net7.0\BUS.pdb
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\BUS\obj\Debug\net7.0\ref\BUS.dll
