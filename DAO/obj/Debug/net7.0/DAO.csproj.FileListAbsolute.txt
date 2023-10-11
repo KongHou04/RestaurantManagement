@@ -1,0 +1,17 @@
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\obj\Debug\net7.0\DAO.csproj.AssemblyReference.cache
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\obj\Debug\net7.0\DAO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\obj\Debug\net7.0\DAO.AssemblyInfoInputs.cache
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\obj\Debug\net7.0\DAO.AssemblyInfo.cs
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\obj\Debug\net7.0\DAO.csproj.CoreCompileInputs.cache
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\bin\Debug\net7.0\DAO.deps.json
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\bin\Debug\net7.0\DAO.runtimeconfig.json
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\bin\Debug\net7.0\DAO.dll
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\bin\Debug\net7.0\DAO.pdb
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\bin\Debug\net7.0\DTO.dll
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\bin\Debug\net7.0\DTO.pdb
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\obj\Debug\net7.0\DAO.csproj.CopyComplete
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\obj\Debug\net7.0\DAO.dll
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\obj\Debug\net7.0\refint\DAO.dll
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\obj\Debug\net7.0\DAO.pdb
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\obj\Debug\net7.0\DAO.genruntimeconfig.cache
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DAO\obj\Debug\net7.0\ref\DAO.dll
