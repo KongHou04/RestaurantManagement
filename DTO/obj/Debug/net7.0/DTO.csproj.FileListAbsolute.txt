@@ -1,0 +1,12 @@
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DTO\bin\Debug\net7.0\DTO.deps.json
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DTO\bin\Debug\net7.0\DTO.dll
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DTO\bin\Debug\net7.0\DTO.pdb
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DTO\obj\Debug\net7.0\DTO.csproj.AssemblyReference.cache
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DTO\obj\Debug\net7.0\DTO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DTO\obj\Debug\net7.0\DTO.AssemblyInfoInputs.cache
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DTO\obj\Debug\net7.0\DTO.AssemblyInfo.cs
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DTO\obj\Debug\net7.0\DTO.csproj.CoreCompileInputs.cache
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DTO\obj\Debug\net7.0\DTO.dll
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DTO\obj\Debug\net7.0\refint\DTO.dll
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DTO\obj\Debug\net7.0\DTO.pdb
+C:\Users\CONG HAU\Desktop\RestaurantManagement\RMSystem\DTO\obj\Debug\net7.0\ref\DTO.dll
