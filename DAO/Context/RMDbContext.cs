@@ -39,22 +39,26 @@ namespace DAO.Context
             modelBuilder.Entity<Category>()
                 .HasMany(e => e.Products)
                 .WithOne(e => e.Category)
-                .HasForeignKey(e => e.CategoryID);
+                .HasForeignKey(e => e.CategoryID)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Region>()
                 .HasMany(e => e.Tables)
                 .WithOne(e => e.Region)
-                .HasForeignKey(e => e.RegionID);
+                .HasForeignKey(e => e.RegionID)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Employee>()
                 .HasMany(e => e.Orders)
                 .WithOne(e => e.Employee)
-                .HasForeignKey(e => e.EmployeeID);
+                .HasForeignKey(e => e.EmployeeID)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Customer>()
                 .HasMany(e => e.Orders)
                 .WithOne(e => e.Customer)
-                .HasForeignKey(e => e.CustomerID);
+                .HasForeignKey(e => e.CustomerID)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Order>()
                 .HasMany(e => e.TableOrderDetails)
@@ -64,12 +68,14 @@ namespace DAO.Context
             modelBuilder.Entity<Table>()
                 .HasMany(e => e.TableOrderDetails)
                 .WithOne(e => e.Table)
-                .HasForeignKey(e => e.TableID);
+                .HasForeignKey(e => e.TableID)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.ProductOrderDetails)
                 .WithOne(e => e.Product)
-                .HasForeignKey(e => e.ProductID);
+                .HasForeignKey(e => e.ProductID)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<TableOrderDetails>()
                 .HasMany(e => e.ProductOrderDetails)
@@ -79,7 +85,8 @@ namespace DAO.Context
             modelBuilder.Entity<Bill>()
                 .HasOne(e => e.Order)
                 .WithOne(e => e.Bill)
-                .HasForeignKey<Bill>(e => e.OrderID);
+                .HasForeignKey<Bill>(e => e.OrderID)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Account)

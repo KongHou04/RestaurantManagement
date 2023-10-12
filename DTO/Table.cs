@@ -20,8 +20,7 @@ namespace DTO
         [MaxLength(255)]
         public string? Description { get; set; }
 
-        [Required]
-        public int RegionID { get; set; }
+        public int? RegionID { get; set; }
 
 
         public Region? Region { get; set; }

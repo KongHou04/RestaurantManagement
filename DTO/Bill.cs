@@ -22,7 +22,7 @@ namespace DTO
         [MaxLength(255)]
         public string? Description { get; set; }
 
-        public int OrderID { get; set; }
+        public int? OrderID { get; set; }
 
 
         public Order? Order { get; set; }

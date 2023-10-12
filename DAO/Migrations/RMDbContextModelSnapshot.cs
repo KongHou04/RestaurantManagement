@@ -64,7 +64,7 @@ namespace DAO.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("OrderID")
+                    b.Property<int?>("OrderID")
                         .HasColumnType("int");
 
                     b.Property<double>("Total")
@@ -73,7 +73,8 @@ namespace DAO.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("OrderID")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[OrderID] IS NOT NULL");
 
                     b.ToTable("Bill");
                 });
@@ -172,14 +173,14 @@ namespace DAO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("CustomerID")
+                    b.Property<int?>("CustomerID")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("EmployeeID")
+                    b.Property<int?>("EmployeeID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("OrderTime")
@@ -205,7 +206,7 @@ namespace DAO.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("CategoryID")
+                    b.Property<int?>("CategoryID")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -249,7 +250,7 @@ namespace DAO.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("ProductID")
+                    b.Property<int?>("ProductID")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -309,7 +310,7 @@ namespace DAO.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("RegionID")
+                    b.Property<int?>("RegionID")
                         .HasColumnType("int");
 
                     b.Property<bool>("Status")
@@ -337,7 +338,7 @@ namespace DAO.Migrations
                     b.Property<int>("OrderID")
                         .HasColumnType("int");
 
-                    b.Property<int>("TableID")
+                    b.Property<int?>("TableID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -365,8 +366,7 @@ namespace DAO.Migrations
                     b.HasOne("DTO.Order", "Order")
                         .WithOne("Bill")
                         .HasForeignKey("DTO.Bill", "OrderID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Order");
                 });
@@ -376,14 +376,12 @@ namespace DAO.Migrations
                     b.HasOne("DTO.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("DTO.Employee", "Employee")
                         .WithMany("Orders")
                         .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Customer");
 
@@ -395,8 +393,7 @@ namespace DAO.Migrations
                     b.HasOne("DTO.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Category");
                 });
@@ -406,8 +403,7 @@ namespace DAO.Migrations
                     b.HasOne("DTO.Product", "Product")
                         .WithMany("ProductOrderDetails")
                         .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("DTO.TableOrderDetails", "TableOrderDetails")
                         .WithMany("ProductOrderDetails")
@@ -425,8 +421,7 @@ namespace DAO.Migrations
                     b.HasOne("DTO.Region", "Region")
                         .WithMany("Tables")
                         .HasForeignKey("RegionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Region");
                 });
@@ -442,8 +437,7 @@ namespace DAO.Migrations
                     b.HasOne("DTO.Table", "Table")
                         .WithMany("TableOrderDetails")
                         .HasForeignKey("TableID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Order");
 

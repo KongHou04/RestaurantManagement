@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAO.Migrations
 {
     /// <inheritdoc />
-    public partial class initDbcontext01 : Migration
+    public partial class InitalCreate1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -84,7 +84,7 @@ namespace DAO.Migrations
                     Status = table.Column<bool>(type: "Bit", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    CategoryID = table.Column<int>(type: "int", nullable: false)
+                    CategoryID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,7 +94,7 @@ namespace DAO.Migrations
                         column: x => x.CategoryID,
                         principalTable: "Category",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,8 +125,8 @@ namespace DAO.Migrations
                     OrderTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<bool>(type: "Bit", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    EmployeeID = table.Column<int>(type: "int", nullable: false),
-                    CustomerID = table.Column<int>(type: "int", nullable: false)
+                    EmployeeID = table.Column<int>(type: "int", nullable: true),
+                    CustomerID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -136,13 +136,13 @@ namespace DAO.Migrations
                         column: x => x.CustomerID,
                         principalTable: "Customer",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Order_Employee_EmployeeID",
                         column: x => x.EmployeeID,
                         principalTable: "Employee",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -154,7 +154,7 @@ namespace DAO.Migrations
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Status = table.Column<bool>(type: "Bit", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    RegionID = table.Column<int>(type: "int", nullable: false)
+                    RegionID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -164,7 +164,7 @@ namespace DAO.Migrations
                         column: x => x.RegionID,
                         principalTable: "Region",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,7 +177,7 @@ namespace DAO.Migrations
                     Total = table.Column<double>(type: "float", nullable: false),
                     BillTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    OrderID = table.Column<int>(type: "int", nullable: false)
+                    OrderID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -187,7 +187,7 @@ namespace DAO.Migrations
                         column: x => x.OrderID,
                         principalTable: "Order",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,7 +198,7 @@ namespace DAO.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     OrderID = table.Column<int>(type: "int", nullable: false),
-                    TableID = table.Column<int>(type: "int", nullable: false)
+                    TableID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -214,7 +214,7 @@ namespace DAO.Migrations
                         column: x => x.TableID,
                         principalTable: "Table",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -227,7 +227,7 @@ namespace DAO.Migrations
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     TableOrDtID = table.Column<int>(type: "int", nullable: false),
-                    ProductID = table.Column<int>(type: "int", nullable: false)
+                    ProductID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -237,7 +237,7 @@ namespace DAO.Migrations
                         column: x => x.ProductID,
                         principalTable: "Product",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_ProductOrderDetails_TableOrderDetails_TableOrDtID",
                         column: x => x.TableOrDtID,
@@ -256,7 +256,8 @@ namespace DAO.Migrations
                 name: "IX_Bill_OrderID",
                 table: "Bill",
                 column: "OrderID",
-                unique: true);
+                unique: true,
+                filter: "[OrderID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_CustomerID",

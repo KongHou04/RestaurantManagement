@@ -21,8 +21,7 @@ namespace DTO
         [Required]
         public int TableOrDtID { get; set; }
 
-        [Required]
-        public int ProductID { get; set; }
+        public int? ProductID { get; set; }
 
 
         public Product? Product { get; set; }

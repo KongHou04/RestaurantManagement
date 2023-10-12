@@ -26,8 +26,7 @@ namespace DTO
         [MaxLength(255)]
         public string? Description { get; set; }
 
-        [Required]
-        public int CategoryID { get; set; }
+        public int? CategoryID { get; set; }
 
 
         public Category? Category { get; set; }

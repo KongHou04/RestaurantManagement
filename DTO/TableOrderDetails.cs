@@ -15,7 +15,7 @@ namespace DTO
         [Required]
         public int OrderID { get; set; }
 
-        public int TableID { get; set; }
+        public int? TableID { get; set; }
 
 
         public Order? Order { get; set; }
