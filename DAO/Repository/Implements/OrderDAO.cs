@@ -23,27 +23,28 @@ namespace DAO.Repository.Implements
 
         public async Task<Order?> GetByID(int id) => await _context.Orders.FirstOrDefaultAsync(o => o.ID == id); 
 
-        public async Task<string> Add(Order order)
+        public async Task<bool> Add(Order order)
         {
             try
             {
                 _context.Add(order);
                 await _context.SaveChangesAsync();
-                return "Added successfully";
+                return true;
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 _context.Remove(order);
                 await _context.SaveChangesAsync();
-                return ex.Message;
+                return false;
             }
         }
 
-        public async Task<string> Update(Order order, int id)
+        public async Task<bool> Update(Order order, int id)
         {
             Order? oldOrd = await _context.Orders.FirstOrDefaultAsync(o => o.ID == id);
             if (oldOrd == null)
-                return "Order does not exist";
+                return false;
             try
             {
                 oldOrd.CustomerID = order.CustomerID;
@@ -52,28 +53,30 @@ namespace DAO.Repository.Implements
                 oldOrd.Status = order.Status;
                 oldOrd.Description = order.Description;
                 await _context.SaveChangesAsync();
-                return "Update successfully";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
 
-        public async Task<string> Remove(int id)
+        public async Task<bool> Remove(int id)
         {
             Order? order = await _context.Orders.FirstOrDefaultAsync(o => o.ID == id);
             if (order == null)
-                return "Order does not exist";
+                return false;
             try
             {
                 _context.Remove(order);
                 await _context.SaveChangesAsync();
-                return "Remove successfully";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
 

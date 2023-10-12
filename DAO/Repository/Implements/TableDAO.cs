@@ -23,55 +23,58 @@ namespace DAO.Repository.Implements
 
         public async Task<Table?> GetByID(int id) => await _context.Tables.FirstOrDefaultAsync(r => r.ID == id); 
 
-        public async Task<string> Add(Table table)
+        public async Task<bool> Add(Table table)
         {
             try
             {
                 _context.Add(table);
                 await _context.SaveChangesAsync();
-                return "Added successfully";
+                return true;
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 _context.Remove(table);
                 await _context.SaveChangesAsync();
-                return ex.Message;
+                return false;
             }
         }
 
-        public async Task<string> Update(Table table, int id)
+        public async Task<bool> Update(Table table, int id)
         {
             Table? oldTab = await _context.Tables.FirstOrDefaultAsync(t => t.ID == id);
             if (oldTab == null)
-                return "Table does not exist";
+                return false;
             try
             {
                 oldTab.Name = table.Name;
                 oldTab.Description = table.Description;
                 oldTab.Status = table.Status;
                 await _context.SaveChangesAsync();
-                return "Update successfully";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
 
-        public async Task<string> Remove(int id)
+        public async Task<bool> Remove(int id)
         {
             Table? table = await _context.Tables.FirstOrDefaultAsync(t => t.ID == id);
             if (table == null)
-                return "Table does not exist";
+                return false;
             try
             {
                 _context.Remove(table);
                 await _context.SaveChangesAsync();
-                return "Remove successfully";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
 

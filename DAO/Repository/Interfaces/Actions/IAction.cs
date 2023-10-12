@@ -8,11 +8,11 @@ namespace DAO.Repository.Interfaces.Actions
 
         public Task<T?> GetByID(Y id); 
         
-        public Task<string> Add(T obj);
+        public Task<bool> Add(T obj);
 
-        public Task<string> Update(T obj, Y id);
+        public Task<bool> Update(T obj, Y id);
 
-        public Task<string> Remove(Y id);
+        public Task<bool> Remove(Y id);
 
     }
 }

@@ -23,27 +23,28 @@ namespace DAO.Repository.Implements
 
         public async Task<Bill?> GetByID(int id) => await _context.Bills.FirstOrDefaultAsync(b => b.ID == id); 
 
-        public async Task<string> Add(Bill bill)
+        public async Task<bool> Add(Bill bill)
         {
             try
             {
                 _context.Add(bill);
                 await _context.SaveChangesAsync();
-                return "Added successfully";
+                return true;
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 _context.Remove(bill);
                 await _context.SaveChangesAsync();
-                return ex.Message;
+                return false;
             }
         }
 
-        public async Task<string> Update(Bill bill, int id)
+        public async Task<bool> Update(Bill bill, int id)
         {
             Bill? oldBill = await _context.Bills.FirstOrDefaultAsync(a => a.ID == id);
             if (oldBill == null)
-                return "Bill does not exist";
+                return false;
             try
             {
                 oldBill.BillTime = bill.BillTime;
@@ -51,28 +52,30 @@ namespace DAO.Repository.Implements
                 oldBill.Description = bill.Description;
                 oldBill.Total = bill.Total;
                 await _context.SaveChangesAsync();
-                return "Update successfully";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
 
-        public async Task<string> Remove(int id)
+        public async Task<bool> Remove(int id)
         {
             Bill? bill = await _context.Bills.FirstOrDefaultAsync(b => b.ID == id);
             if (bill == null)
-                return "Bill does not exist";
+                return false;
             try
             {
                 _context.Remove(bill);
                 await _context.SaveChangesAsync();
-                return "Remove successfully";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
 

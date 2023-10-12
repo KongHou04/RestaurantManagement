@@ -23,27 +23,28 @@ namespace DAO.Repository.Implements
 
         public async Task<Employee?> GetByID(int id) => await _context.Employees.FirstOrDefaultAsync(e => e.ID == id); 
 
-        public async Task<string> Add(Employee employee)
+        public async Task<bool> Add(Employee employee)
         {
             try
             {
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
-                return "Added successfully";
+                return true;
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 _context.Remove(employee);
                 await _context.SaveChangesAsync();
-                return ex.Message;
+                return false;
             }
         }
 
-        public async Task<string> Update(Employee employee, int id)
+        public async Task<bool> Update(Employee employee, int id)
         {
             Employee? oldEmp = await _context.Employees.FirstOrDefaultAsync(e => e.ID == id);
             if (oldEmp == null)
-                return "Employee does not exist";
+                return false;
             try
             {
                 oldEmp.Name = employee.Name;
@@ -54,28 +55,30 @@ namespace DAO.Repository.Implements
                 oldEmp.Status = employee.Status;
                 oldEmp.Avatar = employee.Avatar;
                 await _context.SaveChangesAsync();
-                return "Update successfully";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex.Message);
+                return  false;
             }
         }
 
-        public async Task<string> Remove(int id)
+        public async Task<bool> Remove(int id)
         {
             Employee? employee = await _context.Employees.FirstOrDefaultAsync(e => e.ID == id);
             if (employee == null)
-                return "Employee does not exist";
+                return false;
             try
             {
                 _context.Remove(employee);
                 await _context.SaveChangesAsync();
-                return "Remove successfully";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
 

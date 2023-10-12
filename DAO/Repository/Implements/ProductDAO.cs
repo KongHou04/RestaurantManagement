@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using DAO.Repository.Interfaces;
 using DAO.Context;
 using DTO;
@@ -23,27 +24,28 @@ namespace DAO.Repository.Implements
 
         public async Task<Product?> GetByID(int id) => await _context.Products.FirstOrDefaultAsync(p => p.ID == id); 
 
-        public async Task<string> Add(Product product)
+        public async Task<bool> Add(Product product)
         {
             try
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-                return "Added successfully";
+                return true;
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 _context.Remove(product);
                 await _context.SaveChangesAsync();
-                return ex.Message;
+                return false;
             }
         }
 
-        public async Task<string> Update(Product product, int id)
+        public async Task<bool> Update(Product product, int id)
         {
             Product? oldPro = await _context.Products.FirstOrDefaultAsync(p => p.ID == id);
             if (oldPro == null)
-                return "Product does not exist";
+                return false;
             try
             {
                 oldPro.Name = product.Name;
@@ -53,28 +55,30 @@ namespace DAO.Repository.Implements
                 oldPro.Description = product.Description;
                 oldPro.CategoryID = product.CategoryID;
                 await _context.SaveChangesAsync();
-                return "Update successfully";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
 
-        public async Task<string> Remove(int id)
+        public async Task<bool> Remove(int id)
         {
             Product? product = await _context.Products.FirstOrDefaultAsync(p => p.ID == id);
             if (product == null)
-                return "Product does not exist";
+                return false;
             try
             {
                 _context.Remove(product);
                 await _context.SaveChangesAsync();
-                return "Remove successfully";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
 

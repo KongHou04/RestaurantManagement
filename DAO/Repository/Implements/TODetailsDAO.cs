@@ -23,53 +23,56 @@ namespace DAO.Repository.Implements
 
         public async Task<TableOrderDetails?> GetByID(int id) => await _context.TableOrderDetails.FirstOrDefaultAsync(to => to.ID == id); 
 
-        public async Task<string> Add(TableOrderDetails toDetails)
+        public async Task<bool> Add(TableOrderDetails toDetails)
         {
             try
             {
                 _context.Add(toDetails);
                 await _context.SaveChangesAsync();
-                return "Added successfully";
+                return true;
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 _context.Remove(toDetails);
                 await _context.SaveChangesAsync();
-                return ex.Message;
+                return false;
             }
         }
 
-        public async Task<string> Update(TableOrderDetails toDetails, int id)
+        public async Task<bool> Update(TableOrderDetails toDetails, int id)
         {
             TableOrderDetails? oldTOD = await _context.TableOrderDetails.FirstOrDefaultAsync(to => to.ID == id);
             if (oldTOD == null)
-                return "Order does not exist";
+                return false;
             try
             {
                 
                 await _context.SaveChangesAsync();
-                return "Update successfully";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
 
-        public async Task<string> Remove(int id)
+        public async Task<bool> Remove(int id)
         {
             Order? order = await _context.Orders.FirstOrDefaultAsync(o => o.ID == id);
             if (order == null)
-                return "Order does not exist";
+                return false;
             try
             {
                 _context.Remove(order);
                 await _context.SaveChangesAsync();
-                return "Remove successfully";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
 

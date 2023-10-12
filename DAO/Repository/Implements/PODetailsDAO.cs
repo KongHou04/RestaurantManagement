@@ -23,27 +23,28 @@ namespace DAO.Repository.Implements
 
         public async Task<ProductOrderDetails?> GetByID(int id) => await _context.ProductOrderDetails.FirstOrDefaultAsync(po => po.ID == id); 
 
-        public async Task<string> Add(ProductOrderDetails poDetails)
+        public async Task<bool> Add(ProductOrderDetails poDetails)
         {
             try
             {
                 _context.Add(poDetails);
                 await _context.SaveChangesAsync();
-                return "Added successfully";
+                return true;
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 _context.Remove(poDetails);
                 await _context.SaveChangesAsync();
-                return ex.Message;
+                return false;
             }
         }
 
-        public async Task<string> Update(ProductOrderDetails poDetails, int id)
+        public async Task<bool> Update(ProductOrderDetails poDetails, int id)
         {
             ProductOrderDetails? oldPOD = await _context.ProductOrderDetails.FirstOrDefaultAsync(po => po.ID == id);
             if (oldPOD == null)
-                return "POD does not exist";
+                return false;
             try
             {
                 oldPOD.ProductID = poDetails.ProductID;
@@ -52,28 +53,30 @@ namespace DAO.Repository.Implements
                 oldPOD.Description = poDetails.Description;
                 oldPOD.TableOrDtID = poDetails.TableOrDtID;
                 await _context.SaveChangesAsync();
-                return "Update successfully";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
 
-        public async Task<string> Remove(int id)
+        public async Task<bool> Remove(int id)
         {
             ProductOrderDetails? poDetails = await _context.ProductOrderDetails.FirstOrDefaultAsync(po => po.ID == id);
             if (poDetails == null)
-                return "POD does not exist";
+                return false;
             try
             {
                 _context.Remove(poDetails);
                 await _context.SaveChangesAsync();
-                return "Remove successfully";
+                return true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
 
