@@ -1,4 +1,5 @@
 using BUS.Handler;
+using BUS.Handlers;
 using BUS.Repository.Interfaces;
 using DAO.Repository.Interfaces;
 using DTO;
@@ -24,10 +25,12 @@ namespace BUS.Repository.Implements
             return account;
         }
 
-        public Task<string> SendResetPassCode(string email)
+        public async Task<string> SendResetPassCode(string email)
         {
             // Send Mail
-            return new Task<string>(() => {return "";});
+            if (await EmailSender.SendEmail(email))
+                return "Send code successfully";
+            return "Cannot send code";
         }
 
         public async Task<string> SetNewPassword(string username, string password)
