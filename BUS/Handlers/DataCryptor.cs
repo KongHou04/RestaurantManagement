@@ -5,7 +5,7 @@ namespace BUS.Handler
 {
     public static class DataCryptor
     {
-        public static string EncodeString(string source)
+        public static string EncodeString(this string source)
         {
             using (var md5Hash = MD5.Create())
             {
