@@ -91,7 +91,7 @@ namespace DAO.Context
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Account)
                 .WithOne(e => e.Employee)
-                .HasForeignKey<Account>(e => e.EmployeeID);
+                .HasForeignKey<Employee>(e => e.Username);
 
         }
 

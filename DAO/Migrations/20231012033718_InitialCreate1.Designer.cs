@@ -4,6 +4,7 @@ using DAO.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(RMDbContext))]
-    partial class RMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231012033718_InitialCreate1")]
+    partial class InitialCreate1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,12 +31,18 @@ namespace DAO.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("EmployeeID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Username");
+
+                    b.HasIndex("EmployeeID")
+                        .IsUnique();
 
                     b.ToTable("Account");
                 });
@@ -154,15 +163,7 @@ namespace DAO.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("Username")
-                        .IsUnique();
 
                     b.ToTable("Employee");
                 });
@@ -352,6 +353,17 @@ namespace DAO.Migrations
                     b.ToTable("TableOrderDetails");
                 });
 
+            modelBuilder.Entity("DTO.Account", b =>
+                {
+                    b.HasOne("DTO.Employee", "Employee")
+                        .WithOne("Account")
+                        .HasForeignKey("DTO.Account", "EmployeeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("DTO.Bill", b =>
                 {
                     b.HasOne("DTO.Order", "Order")
@@ -360,17 +372,6 @@ namespace DAO.Migrations
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("DTO.Employee", b =>
-                {
-                    b.HasOne("DTO.Account", "Account")
-                        .WithOne("Employee")
-                        .HasForeignKey("DTO.Employee", "Username")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
                 });
 
             modelBuilder.Entity("DTO.Order", b =>
@@ -446,11 +447,6 @@ namespace DAO.Migrations
                     b.Navigation("Table");
                 });
 
-            modelBuilder.Entity("DTO.Account", b =>
-                {
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("DTO.Category", b =>
                 {
                     b.Navigation("Products");
@@ -463,6 +459,8 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("DTO.Employee", b =>
                 {
+                    b.Navigation("Account");
+
                     b.Navigation("Orders");
                 });
 

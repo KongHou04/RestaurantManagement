@@ -14,9 +14,6 @@ namespace DTO
         [MaxLength(50)]
         public string? Password { get; set; }
 
-        [Required]
-        public int EmployeeID { get; set; }
-    
         public Employee? Employee { get; set; }
     
     }

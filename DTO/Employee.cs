@@ -35,6 +35,10 @@ namespace DTO
         [MaxLength(255)]
         public string? Avatar { get; set; }
 
+        [Required]
+        [MaxLength(50)]
+        public string? Username { get; set; }
+
 
         public Account? Account { get; set; }
         public ICollection<Order>? Orders { get; set;}
