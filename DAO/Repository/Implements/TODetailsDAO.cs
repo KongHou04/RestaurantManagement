@@ -23,6 +23,8 @@ namespace DAO.Repository.Implements
 
         public async Task<TableOrderDetails?> GetByID(int id) => await _context.TableOrderDetails.FirstOrDefaultAsync(to => to.ID == id); 
 
+        public async Task<List<TableOrderDetails>> GetEntitysByFK(Order order) => await _context.TableOrderDetails.Where(to => to.OrderID == order.ID).ToListAsync();
+
         public async Task<bool> Add(TableOrderDetails toDetails)
         {
             try
