@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection.Metadata;
 using Azure.Core;
 using BUS.Handlers;
@@ -113,6 +114,40 @@ namespace BUS.Handler
                 Total = total?? 0,
                 Description = description,
                 BillTime = billTime?? DateTime.Now
+            };
+        }
+
+        public static Order? GetOrder(DateTime orderTime, int? employeeID = null, int? customerID = null, bool status = false, string? description = null)
+        {
+            return new Order()
+            {
+                OrderTime = orderTime,
+                Status = status,
+                Description = description,
+                EmployeeID = employeeID,
+                CustomerID = customerID
+            };
+        }
+
+        public static TableOrderDetails? GetTODetails(int orderID, int? tableID, string? description = null)
+        {
+            return new TableOrderDetails()
+            {
+                OrderID = orderID,
+                TableID = tableID,
+                Description = description
+            };
+        }
+
+        public static ProductOrderDetails? GetPODetails(int tableOrDtID, int? productID, double price, int quantity, string? description = null)
+        {
+            return new ProductOrderDetails()
+            {
+                TableOrDtID = tableOrDtID,
+                ProductID = productID,
+                Price = price,
+                Quantity = quantity,
+                Description = description
             };
         }
     }

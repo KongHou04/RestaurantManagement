@@ -6,6 +6,5 @@ namespace DAO.Repository.Interfaces
     public interface ICustomerDAO : IAction<Customer, int>, INameSearcher<Customer>
     {
     }
-
 }
 

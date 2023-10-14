@@ -8,9 +8,9 @@ namespace DAO.Repository.Interfaces.Actions
 
         public Task<T?> GetByID(Y id); 
         
-        public Task<bool> Add(T obj);
+        public Task<bool> Add(T entity);
 
-        public Task<bool> Update(T obj, Y id);
+        public Task<bool> Update(T entity, Y id);
 
         public Task<bool> Remove(Y id);
 

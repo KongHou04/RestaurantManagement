@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAO.Repository.Implements
 {
-    public class TODetailsDAO : DbContextAccessor, ITODetailsDAO 
+    public class TODetailsDAO : DbContextAccessor, ITODetailsDAO
     {
 
         #region Constructors
@@ -24,6 +24,25 @@ namespace DAO.Repository.Implements
         public async Task<TableOrderDetails?> GetByID(int id) => await _context.TableOrderDetails.FirstOrDefaultAsync(to => to.ID == id); 
 
         public async Task<List<TableOrderDetails>> GetEntitysByFK(Order order) => await _context.TableOrderDetails.Where(to => to.OrderID == order.ID).ToListAsync();
+
+        public async Task<TableOrderDetails?> GetEntityBy2FK(Order order, Table table) => await _context.TableOrderDetails.FirstOrDefaultAsync(to => to.OrderID == order.ID && to.TableID == table.ID);
+
+        public async Task<TableOrderDetails?> AddnReturn(TableOrderDetails toDetails)
+        {
+            try
+            {
+                await _context.TableOrderDetails.AddAsync(toDetails);
+                await _context.SaveChangesAsync();
+                return toDetails;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                _context.Remove(toDetails);
+                await _context.SaveChangesAsync();
+                return null;
+            }
+        }
 
         public async Task<bool> Add(TableOrderDetails toDetails)
         {

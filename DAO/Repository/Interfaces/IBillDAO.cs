@@ -6,5 +6,4 @@ namespace DAO.Repository.Interfaces
     public interface IBillDAO : IAction<Bill, int>
     {
     }
-
 }

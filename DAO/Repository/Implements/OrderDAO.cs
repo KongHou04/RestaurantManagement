@@ -23,6 +23,36 @@ namespace DAO.Repository.Implements
 
         public async Task<Order?> GetByID(int id) => await _context.Orders.FirstOrDefaultAsync(o => o.ID == id); 
 
+        public async Task<Order?> AddnReturn(Order order)
+        {
+            try
+            {
+                await _context.Orders.AddAsync(order);
+                await _context.SaveChangesAsync();
+                return order;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                _context.Remove(order);
+                await _context.SaveChangesAsync();
+                return null;
+            }
+        }
+
+        public async Task<double> GetTotal(int id)
+        {
+            double total = new double();
+            List<TableOrderDetails> toDetails =  await _context.TableOrderDetails.Where(to => to.OrderID == id).ToListAsync();
+            toDetails.ForEach(async (t) => {
+                List<ProductOrderDetails> poDetails = await _context.ProductOrderDetails.Where(po => po.TableOrDtID == t.ID).ToListAsync();
+                poDetails.ForEach((p) => {
+                    total += p.Price * p.Quantity;
+                });
+            });
+            return total;
+        }
+
         public async Task<bool> Add(Order order)
         {
             try

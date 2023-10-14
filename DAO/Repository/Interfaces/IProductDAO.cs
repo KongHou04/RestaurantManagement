@@ -5,6 +5,7 @@ namespace DAO.Repository.Interfaces
 {
     public interface IProductDAO : IAction<Product, int>, INameSearcher<Product>
     {
+        public Task<double> GetUnitPrice(int id);
+        
     }
-
 }

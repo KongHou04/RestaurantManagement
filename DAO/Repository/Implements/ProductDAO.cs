@@ -23,6 +23,13 @@ namespace DAO.Repository.Implements
         public async Task<List<Product>> GetAll() => await _context.Products.ToListAsync();
 
         public async Task<Product?> GetByID(int id) => await _context.Products.FirstOrDefaultAsync(p => p.ID == id); 
+        public async Task<double> GetUnitPrice(int id)
+        {
+            Product? product = await _context.Products.FirstOrDefaultAsync(p => p.ID == id);
+            if (product != null)
+                return product.UnitPrice;
+            return -1;
+        } 
 
         public async Task<bool> Add(Product product)
         {

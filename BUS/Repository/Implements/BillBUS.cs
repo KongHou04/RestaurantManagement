@@ -37,13 +37,7 @@ namespace BUS.Repository.Implements
                         if (customer != null)
                             customerName = customer.Name;
                     }
-                    List<TableOrderDetails> toDetails = await _toDetailsDAO.GetEntitysByFK(order);
-                    toDetails.ForEach(async (ot) => {
-                        List<ProductOrderDetails> poDetails = await _poDetailsDAO.GetEntitysByFK(ot);
-                        poDetails.ForEach((po) =>{
-                            total += po.Price * po.Quantity;
-                        });
-                    });
+                    total = await _orderDAO.GetTotal((int)orderID);
                 }
             }
             Bill? bill = DataCreator.GetBill(orderID, customerName, total, description, dateTime);
@@ -72,24 +66,21 @@ namespace BUS.Repository.Implements
 
         public async Task<string> RemoveBill(int id)
         {
-            // Bill? bill = await _billDAO.GetByID(id);
-            // if (bill == null)
-            //     return "Bill does not exist";
-            // if (bill.Status == true)
-            // {
-            //     category.Status = false;
-            //     if (await _categoryDAO.Update(category, id))
-            //         return "This category status is setted to InActive. Click Remove again to actually delete it from database";
-            // }
-            // else
-            // {
-            //     if (await _categoryDAO.Remove(id))
-            //         return "Remove category successfully";
-            // }
-            // return "Cannot remove this category";
-            return await Task.FromResult("Dont allow to remove any bill");
-            // Update Table Bill - add status to update this method
-            // Before that, you dont allow to remove any Bill from database
+            Bill? bill = await _billDAO.GetByID(id);
+            if (bill == null)
+                return "Bill does not exist";
+            if (bill.Status == true)
+            {
+                bill.Status = false;
+                if (await _billDAO.Update(bill, id))
+                    return "This bill status is setted to unpaid. Click Remove again to actually delete it from database";
+            }
+            else
+            {
+                if (await _billDAO.Remove(id))
+                    return "Remove bill successfully";
+            }
+            return "Cannot remove this bill";
         }
         
     }
