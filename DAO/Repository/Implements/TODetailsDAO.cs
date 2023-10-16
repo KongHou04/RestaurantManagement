@@ -27,6 +27,15 @@ namespace DAO.Repository.Implements
 
         public async Task<TableOrderDetails?> GetEntityBy2FK(Order order, Table table) => await _context.TableOrderDetails.FirstOrDefaultAsync(to => to.OrderID == order.ID && to.TableID == table.ID);
 
+        public async Task<int?> GetOrderID(int tableID)
+        {
+            List<TableOrderDetails> toList = _context.TableOrderDetails.ToList();
+            TableOrderDetails? toDetails = toList.LastOrDefault(to => to.Status == false && to.TableID == tableID);
+            if (toDetails != null)
+                return await Task.FromResult(toDetails.ID);
+            return null;
+        }
+
         public async Task<TableOrderDetails?> AddnReturn(TableOrderDetails toDetails)
         {
             try

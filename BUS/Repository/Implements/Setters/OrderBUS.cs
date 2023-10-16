@@ -1,10 +1,11 @@
 using BUS.Handler;
-using BUS.Repository.Interfaces;
+using BUS.Repository.Interfaces.Setters;
 using DAO.Repository.Implements;
 using DAO.Repository.Interfaces;
 using DTO;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-namespace BUS.Repository.Implements
+namespace BUS.Repository.Implements.Setters
 {
     public class OrderBUS : IOrderBUS
     {
@@ -81,6 +82,21 @@ namespace BUS.Repository.Implements
             if (await _poDetailsDAO.Update(poDetails, poDetails.ID))
                 return "Update sucessfully";
             return "Cannot update order";
+        }
+
+        public async Task<string> RemoveOrder(int orderID)
+        {
+            List<TableOrderDetails> toDetails = await _toDetailsDAO.GetEntitysByFK(new Order(){ID = orderID});
+            toDetails.ForEach(async (to) => {
+                List<ProductOrderDetails> poDetails = await _poDetailsDAO.GetEntitysByFK(to);
+                poDetails.ForEach(async (po) => {
+                    await _poDetailsDAO.Remove(po.ID);
+                });
+                await _toDetailsDAO.Remove(to.ID);
+            });
+            if (await _orderDAO.Remove(orderID))
+                return "Remove order successfully";
+            return "Cannot remove order";
         }
     }
 }

@@ -10,7 +10,7 @@ namespace BUS.Handlers
                 return false;
             if (maxLenght != null && str?.Length > maxLenght)
                 return false;
-            if (isAcceptNumber && str?.IndexOfAny(new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}) >= 0)
+            if (!isAcceptNumber && str?.IndexOfAny(new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}) >= 0)
                 return false;
             if (invalidChars != null && str?.IndexOfAny(invalidChars) >= 0)
                 return false;

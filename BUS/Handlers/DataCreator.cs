@@ -129,12 +129,13 @@ namespace BUS.Handler
             };
         }
 
-        public static TableOrderDetails? GetTODetails(int orderID, int? tableID, string? description = null)
+        public static TableOrderDetails? GetTODetails(int orderID, int? tableID, bool status = false, string? description = null)
         {
             return new TableOrderDetails()
             {
                 OrderID = orderID,
                 TableID = tableID,
+                Status = status,
                 Description = description
             };
         }

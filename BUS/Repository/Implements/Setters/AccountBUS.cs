@@ -1,10 +1,10 @@
 using BUS.Handler;
 using BUS.Handlers;
-using BUS.Repository.Interfaces;
+using BUS.Repository.Interfaces.Setters;
 using DAO.Repository.Interfaces;
 using DTO;
 
-namespace BUS.Repository.Implements
+namespace BUS.Repository.Implements.Setters
 {
     public class AccountBUS : IAccountBUS
     {

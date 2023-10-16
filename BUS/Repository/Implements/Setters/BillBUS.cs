@@ -1,11 +1,11 @@
 using System.Reflection.Metadata.Ecma335;
 using System.Net.Http.Headers;
 using BUS.Handler;
-using BUS.Repository.Interfaces;
+using BUS.Repository.Interfaces.Setters;
 using DAO.Repository.Interfaces;
 using DTO;
 
-namespace BUS.Repository.Implements
+namespace BUS.Repository.Implements.Setters
 {
     public class BillBUS : IBillBUS
     {
@@ -13,15 +13,13 @@ namespace BUS.Repository.Implements
         IOrderDAO _orderDAO;
         ICustomerDAO _customerDAO;
         ITODetailsDAO _toDetailsDAO;
-        IPODetailsDAO _poDetailsDAO;
 
-        public BillBUS(IBillDAO billDAO, IOrderDAO orderDAO, ICustomerDAO customerDAO, ITODetailsDAO toDetailsDAO, IPODetailsDAO poDetailsDAO)
+        public BillBUS(IBillDAO billDAO, IOrderDAO orderDAO, ICustomerDAO customerDAO, ITODetailsDAO toDetailsDAO)
         {
             _billDAO = billDAO;
             _orderDAO = orderDAO;
             _customerDAO = customerDAO;
             _toDetailsDAO = toDetailsDAO;
-            _poDetailsDAO = poDetailsDAO;
         }
 
         public async Task<string> AddBill(int? orderID, string? customerName, double? total, string? description, DateTime? dateTime = null)
@@ -37,7 +35,19 @@ namespace BUS.Repository.Implements
                         if (customer != null)
                             customerName = customer.Name;
                     }
+                    await _orderDAO.Update(order, order.ID);
                     total = await _orderDAO.GetTotal((int)orderID);
+                    List<TableOrderDetails> toDetails;
+                    if (orderID != null)
+                    {
+                        toDetails = await _toDetailsDAO.GetEntitysByFK(order);
+                        toDetails.ForEach((to) => {
+                            to.Status = true;
+                            _toDetailsDAO.Update(to, to.ID);
+                        });
+                        order.Status = true;
+                        await _orderDAO.Update(order, order.ID);
+                    }
                 }
             }
             Bill? bill = DataCreator.GetBill(orderID, customerName, total, description, dateTime);

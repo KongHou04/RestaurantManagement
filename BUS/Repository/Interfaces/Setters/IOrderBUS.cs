@@ -1,4 +1,4 @@
-namespace BUS.Repository.Interfaces
+namespace BUS.Repository.Interfaces.Setters
 {
     public interface IOrderBUS
     {

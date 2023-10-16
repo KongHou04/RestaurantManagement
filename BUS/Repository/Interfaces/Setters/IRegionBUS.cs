@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using DTO;
-namespace BUS.Repository.Interfaces
+namespace BUS.Repository.Interfaces.Setters
 {
     public interface IRegionBUS
     {

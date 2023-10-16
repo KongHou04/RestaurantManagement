@@ -9,6 +9,10 @@ namespace DTO
         [Key]
         public int ID { get; set; }
 
+        [Required]
+        [Column(TypeName = "Bit")]
+        public bool Status { get; set; }
+
         [MaxLength(255)]
         public string? Description { get; set; }
 
