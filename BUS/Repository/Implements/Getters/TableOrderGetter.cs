@@ -22,11 +22,16 @@ namespace BUS.Repository.Implements.Getters
         {
             List<TableOrder> tableOrders = new List<TableOrder>();
             List<Table> tables = await _tableDAO.GetAll();
-            tables.ForEach(async (table) => {
-                int? orderID = await _toDetailsDAO.GetOrderID(table.ID);
-                double? total = (orderID == null)? null : await _orderDAO.GetTotal((int)orderID);
-                tableOrders.Add(new TableOrder(table, orderID, total));
-            });
+            for (int i = 0; i < tables.Count; i++)
+            {
+                int? orderID = await _toDetailsDAO.GetOrderID(tables[i].ID);
+                double? total = null;
+                if (orderID != null)
+                {
+                    total = await _orderDAO.GetTotal((int)orderID);
+                }
+                tableOrders.Add(new TableOrder(tables[i], orderID, total));
+            }
             return tableOrders;
         }
     }

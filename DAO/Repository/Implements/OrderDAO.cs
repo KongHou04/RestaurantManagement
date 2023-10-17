@@ -43,13 +43,18 @@ namespace DAO.Repository.Implements
         public async Task<double> GetTotal(int id)
         {
             double total = new double();
-            List<TableOrderDetails> toDetails =  await _context.TableOrderDetails.Where(to => to.OrderID == id).ToListAsync();
-            toDetails.ForEach(async (t) => {
-                List<ProductOrderDetails> poDetails = await _context.ProductOrderDetails.Where(po => po.TableOrDtID == t.ID).ToListAsync();
-                poDetails.ForEach((p) => {
-                    total += p.Price * p.Quantity;
-                });
-            });
+            List<TableOrderDetails> toDetails = await _context.TableOrderDetails.Where(to => to.OrderID == id).ToListAsync();
+            await Task.WhenAll(toDetails.Select(async (t) =>
+            {
+                using (var context = new RMDbContext())
+                {
+                    List<ProductOrderDetails> poDetails = await context.ProductOrderDetails.Where(po => po.TableOrDtID == t.ID).ToListAsync();
+                    poDetails.ForEach((p) =>
+                    {
+                        total += p.Price * p.Quantity;
+                    });
+                }
+            }));
             return total;
         }
 

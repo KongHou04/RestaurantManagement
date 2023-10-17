@@ -29,7 +29,7 @@ namespace DAO.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connStr = @"Data Source =LAPTOP-BV87SDMM\HAU; Initial Catalog = RestaurantManagement; Integrated Security = true; ;TrustServerCertificate=true ";
+            string connStr = @"Data Source = LAPTOP - BV87SDMM\HAU; Initial Catalog = RestaurantManagement; Integrated Security = true; ;TrustServerCertificate=true ";
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(connStr);
         }

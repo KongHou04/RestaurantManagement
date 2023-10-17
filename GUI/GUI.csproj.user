@@ -1,8 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <ItemGroup>
-        <Compile Update="Form1.cs">
-            <SubType>Form</SubType>
-        </Compile>
-    </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Components\Actions\ActionRegionPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\BillContainerPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\BillDisplayComponent.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\BillPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\CategoryContainerPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\CategorySquare.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\ControlsPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\EmployeeContainerPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\EmployeePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\EmployeeSquare.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\ProductCategoryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\ProductContainerPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\ProductPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\ProductSquare.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\RegionContainerPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\RegionSquare.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\TableContainerPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\TableOrderPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\TablePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\TableRegionPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\TableSquare.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Components\TableTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Forms\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>
